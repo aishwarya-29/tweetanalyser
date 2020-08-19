@@ -1,0 +1,74 @@
+.body {
+    background-image: url(https://i.imgur.com/CFaHrpl.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+body {
+    -webkit-transition: all 2s ease;
+    -moz-transition: all 2s ease;
+    -o-transition: all 2s ease;
+    transition: all 2s ease;
+}
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+ }
+ 
+ @keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+ }
+ 
+ .fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+ }
+
+#header {
+    float: right;
+    padding: 5%;
+    padding-right: 2%;
+    margin-right: 0%;
+    margin-top: 5%;
+    text-align: right;
+}
+
+#header h1 {
+    font-family: 'Londrina Outline', cursive;
+    font-size: 335%;
+    margin-bottom: 2%;
+    color: black;
+}
+
+#second {
+    display: none;
+}
+
+.twitter-bird-animation {
+    background-image: url("http://www.cloud.elalemanyo.de/tmp/twitter-bird-sprite-e0FhFKaXRI.png");
+      background-size: cover;
+      display: block;
+    position: relative;
+      height: 75px;
+    width: 75px;
+    margin: 50px auto 0 auto;
+    animation: 0.3s fly step-end infinite;
+  }
+  
+  @keyframes fly {
+    0%  { background-position: 0 0;}
+    33% { background-position: -250 0;}
+    66% { background-position: -450px 0;}
+  }
+
+
+  .clearfix:before { content: ''; display: block; }
+  .clearfix:after { content: ''; display: table; clear: both;}
+
+#first {
+    margin:auto;
+    padding-top: 15%;
+}
+
