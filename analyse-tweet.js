@@ -6,6 +6,19 @@ var math = require('mathjs');
 var positiveTweets = [];
 var negativeTweets = [];
 
+var express = require("express"),
+    router = express.Router(),
+    bodyParser = require("body-parser");
+router.use(bodyParser.json());
+
+router.post("/analysetweet", function(req,res){
+    var tweet = req.body.tweet;
+    var result = predict(tweet);
+    var x = {
+        result: result
+    }
+    return res.send(x);
+});
 
 data.forEach(function(tweet){
     positiveTweets.push(tweet.text);
@@ -98,8 +111,8 @@ for(var i = 0; i<tokens.length;i++) {
 
 // train_x = training data, sentiment = label;
 
-var twee = "this world is truly an awesome place guys ily";
-predict(twee);
+// var twee = "this world is truly an awesome place guys ily";
+// predict(twee);
 
 
 function sigmoid(z) {
@@ -139,5 +152,7 @@ function predict(tweet) {
     features[1] = features[1]*0.0005639;
     features[2] = features[2]*(-0.00055517);
     const finalResults = sigmoid(features);
-    console.log(finalResults);  
+    return finalResults;
 }
+
+module.exports = router;

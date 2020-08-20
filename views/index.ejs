@@ -16,6 +16,12 @@
 <body>
     <div class="container" id="first">
         <div class="twitter-bird-animation clearfix" id="image"></div>
+        <div class="container" id="progress">    
+            <div class="progress2 progress-moved">
+              <div class="progress-bar2" >
+              </div>                       
+            </div> 
+          </div>
     </div>
     <div class="container" id="second">
         <div class="container" id="header">
@@ -25,10 +31,12 @@
             <div>
                 <textarea type="text" class="input" placeholder="Place your tweet here"></textarea>
                 <br>
-                <label>done</label>
+                <label id="done">done</label>
             </div>
             <input type="checkbox" id="toggle">
-            <dialog >
+            <input type="checkbox" id="toggle2">
+            <input type="checkbox" id="toggle3">
+            <dialog id="dialog1">
             <p>
             Just a reminder that the model used here is primitive. It is advised to input those 
             tweets whose sentiment is quite clear and does not include contradictory sentiments
@@ -36,6 +44,14 @@
             <br> Thank you. 
             </p>
             <label for="toggle">close</label>
+            </dialog>
+            <dialog id="dialog2">
+                <p>Your tweet has a postive sentiment of</p>
+                <label id="clear" for="toggle2">close</label>
+            </dialog>
+            <dialog id="dialog3">
+                <p>Your tweet has a negative sentiment of</p>
+                <label id="clear" for="toggle3">close</label>
             </dialog>
         </div>
     </div>

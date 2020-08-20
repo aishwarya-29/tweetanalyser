@@ -1,9 +1,9 @@
 $(document).mousemove(function(e){
-    $("#image").css({left:e.pageX, top:e.pageY-100});
+    $("#image").css({left:e.pageX-70, top:e.pageY-170});
 });
 $(document).ready(function(){
     setTimeout(function(){
-        $('#first').addClass('animate__animated animate__zoomOut');
+        $('#first').fadeOut("slow");
         setTimeout(function(){$('body').addClass('body');},500);
         setTimeout(function(){
             $('#second').fadeIn("slow");
@@ -22,7 +22,7 @@ $(document).ready(function(){
             setTimeout(typeWriter,1000);
             setTimeout(function(){$('#content').css('display','block')},2000);
         },2000);
-    },500);
+    },5000);
 });
 var checkOnce = true;
 $('.input').click(function(){
@@ -30,6 +30,44 @@ $('.input').click(function(){
         $('#toggle').prop('checked',true);
         checkOnce = false;
     }
-        
+    
+});
 
-})
+$('#done').click(function(){
+    var input = $('textarea').val();
+    if(input == '') {
+        alert("No text");
+    } else {
+        var formData = {
+            tweet: input
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/analysetweet",
+            data: JSON.stringify(formData),
+            dataType: 'json',
+            success: function (data) {
+                var result = data.result;
+                if(result>0.5){
+                    $('#dialog2 p').append(" " + result*100 + "%");
+                    $('#toggle2').prop('checked',true);
+                }
+                else {
+                    $('#dialog3 p').append(" " + result*100 + "%");
+                    $('#toggle3').prop('checked',true);
+                }
+                
+            },
+            error: function (e) {
+                alert("Error!")
+                console.log("ERROR: ", e);
+            }
+        });
+    }
+});
+
+$('#clear').click(function(){
+    $('#dialog2 p').text('Your tweet has a postive sentiment of');
+    $('#dialog3 p').text('Your tweet has a negative sentiment of');
+});
