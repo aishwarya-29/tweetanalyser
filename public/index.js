@@ -34,6 +34,8 @@ $('.input').click(function(){
 });
 
 $('#done').click(function(){
+    $('#dialog2 p').text('Your tweet has a postive sentiment of');
+    $('#dialog3 p').text('Your tweet has a negative sentiment of');
     var input = $('textarea').val();
     if(input == '') {
         alert("No text");
