@@ -1,4 +1,6 @@
-
+$(document).mousemove(function(e){
+    $("#image").css({left:e.pageX, top:e.pageY-100});
+});
 $(document).ready(function(){
     setTimeout(function(){
         $('#first').addClass('animate__animated animate__zoomOut');
@@ -18,6 +20,16 @@ $(document).ready(function(){
             }
             }
             setTimeout(typeWriter,1000);
+            setTimeout(function(){$('#content').css('display','block')},2000);
         },2000);
-    },2000);
+    },500);
 });
+var checkOnce = true;
+$('.input').click(function(){
+    if(checkOnce) {
+        $('#toggle').prop('checked',true);
+        checkOnce = false;
+    }
+        
+
+})

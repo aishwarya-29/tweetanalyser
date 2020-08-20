@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/index.css">
     <link href="https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap" rel="stylesheet">
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
@@ -14,11 +15,28 @@
 </head>
 <body>
     <div class="container" id="first">
-        <div class="twitter-bird-animation clearfix"></div>
+        <div class="twitter-bird-animation clearfix" id="image"></div>
     </div>
     <div class="container" id="second">
         <div class="container" id="header">
             <h1 id="heading"></h1>
+        </div>
+        <div class="container" id = "content">
+            <div>
+                <textarea type="text" class="input" placeholder="Place your tweet here"></textarea>
+                <br>
+                <label>done</label>
+            </div>
+            <input type="checkbox" id="toggle">
+            <dialog >
+            <p>
+            Just a reminder that the model used here is primitive. It is advised to input those 
+            tweets whose sentiment is quite clear and does not include contradictory sentiments
+            that are difficult to interpret. 
+            <br> Thank you. 
+            </p>
+            <label for="toggle">close</label>
+            </dialog>
         </div>
     </div>
 

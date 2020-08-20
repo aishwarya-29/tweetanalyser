@@ -5,6 +5,9 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+* {
+  font-family: 'Josefin Sans', sans-serif;
+}
 body {
     -webkit-transition: all 2s ease;
     -moz-transition: all 2s ease;
@@ -31,7 +34,7 @@ body {
     padding: 5%;
     padding-right: 2%;
     margin-right: 0%;
-    margin-top: 5%;
+    margin-top: 0%;
     text-align: right;
 }
 
@@ -39,19 +42,22 @@ body {
     font-family: 'Londrina Outline', cursive;
     font-size: 335%;
     margin-bottom: 2%;
+    margin-top: 0%;
     color: black;
 }
 
 #second {
     display: none;
+    margin-right: 3%;
+    margin-top: 0%;
 }
 
 .twitter-bird-animation {
     background-image: url("http://www.cloud.elalemanyo.de/tmp/twitter-bird-sprite-e0FhFKaXRI.png");
-      background-size: cover;
-      display: block;
-    position: relative;
-      height: 75px;
+    background-size: cover;
+    display: block;
+    position: absolute;
+    height: 75px;
     width: 75px;
     margin: 50px auto 0 auto;
     animation: 0.3s fly step-end infinite;
@@ -68,7 +74,65 @@ body {
   .clearfix:after { content: ''; display: table; clear: both;}
 
 #first {
-    margin:auto;
-    padding-top: 15%;
+    margin-top: 5%;
+    padding-left: 43%;
+    padding-top: 12%;
 }
 
+#content {
+  display: none;
+  margin-top: 0%;
+  text-align: right;
+}
+
+.input {
+  width: 50%;
+  min-width: 250px;
+  margin-top: 0%;
+  background-color: #E6F4F1;
+  border:none;
+  border-bottom: 1px solid #9BAEBC;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2),
+        0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  padding: 1%;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+.input:focus:not([readonly]){
+  border:none;
+  border-bottom: 1px solid #374955;
+}
+
+#toggle{
+  visibility: hidden;
+  opacity: 0;
+  position: relative;
+  z-index: -1;
+}
+
+#toggle:checked ~ dialog {
+  display: block;
+}
+
+label, button{
+  background: #374955;
+  color: white;
+  padding: .5em 1em;
+  border-radius: 4px;
+  cursor: pointer;
+  
+}
+@keyframes appear {
+  0%{
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+dialog{
+  animation: appear 350ms ease-in 1;
+  max-width: 500px;
+  text-align: center;
+}
