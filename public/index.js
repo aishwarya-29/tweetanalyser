@@ -51,12 +51,12 @@ $('#done').click(function(){
             dataType: 'json',
             success: function (data) {
                 var result = data.result;
-                if(result>0.5){
+                if(result>0){
                     $('#dialog2 p').append(" " + result*100 + "%");
                     $('#toggle2').prop('checked',true);
                 }
                 else {
-                    $('#dialog3 p').append(" " + result*100 + "%");
+                    $('#dialog3 p').append(" " + result*100*-1 + "%");
                     $('#toggle3').prop('checked',true);
                 }
                 

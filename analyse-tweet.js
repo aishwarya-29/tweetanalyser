@@ -11,15 +11,6 @@ var express = require("express"),
     bodyParser = require("body-parser");
 router.use(bodyParser.json());
 
-router.post("/analysetweet", function(req,res){
-    var tweet = req.body.tweet;
-    var result = predict(tweet);
-    var x = {
-        result: result
-    }
-    return res.send(x);
-});
-
 data.forEach(function(tweet){
     positiveTweets.push(tweet.text);
 });
@@ -64,7 +55,8 @@ for(var i=0;i<tokens.length;i++) {
         tokens[i][j] = natural.PorterStemmer.stem(tokens[i][j]);
     }
 }
-//console.log(tokens[2277]);
+
+
 var sentiment = [];
 for(var i = 0;i<5000;i++)
     sentiment.push(1);
@@ -72,7 +64,8 @@ for(var i = 0;i<5000;i++)
     sentiment.push(0);
 var freqs = {};
 var number = ["zero","one"];
-//console.log(number[1]);
+
+
 for(var i = 0; i < 10000; i++) {
     for(var j = 0; j<tokens[i].length; j++) {
         if(freqs[tokens[i][j]] && freqs[tokens[i][j]][number[sentiment[i]]])
@@ -154,5 +147,88 @@ function predict(tweet) {
     const finalResults = sigmoid(features);
     return finalResults;
 }
+
+function naivebayes_train(freqs,x,y) {
+    var loglikelihood = {};
+    var logprior = 0;
+    var V = 0;
+    var vocab = new Set();
+    for (word in freqs) {
+        vocab.add(word);
+    }
+    V = vocab.size;
+    var N_pos = 0, N_neg = 0;
+    for (word in freqs) {
+        for (zeroOrOne in freqs[word]) {
+            if(zeroOrOne == "one") 
+                N_pos += freqs[word]["one"];
+            else if(zeroOrOne == "zero")
+                N_neg += freqs[word]["zero"];
+        }
+    }
+    logprior = 0;
+    for (let item of vocab) {
+        var freq_pos = 0, freq_neg = 0;
+        if(freqs[item]["one"])
+            freq_pos = freqs[item]["one"];
+        if(freqs[item]["zero"])
+            freq_neg = freqs[item]["zero"];
+        
+        var p_w_pos = (freq_pos+1)/(N_pos + V);
+        var p_w_neg = (freq_neg+1)/(N_neg + V);
+        loglikelihood[item] = Math.log10(p_w_pos / p_w_neg);
+    }
+
+    return loglikelihood;
+}
+
+
+var temp = naivebayes_train(freqs,train_x,sentiment);
+
+function naivebayes_test(tweet,loglikelihood) {
+    tweet = tweet.replace('^RT[\s]+','');
+    tweet = tweet.replace(/\bhttps\S+/ig,"");
+    tweet = tweet.replace(/#/g,'');
+    tweet = tweet.replace(/@\S+/ig,"");
+    token = tokenizer.tokenize(tweet);
+    if(tweet.includes(':)'))
+        token.push(':)');
+    if(tweet.includes(':('))
+        token.push(':(');
+    if(tweet.includes(':P'))
+        token.push(':P');
+    if(tweet.includes(':/'))
+        token.push(':/');
+    var clean = []
+    for (var j = 0;j<token.length;j++) {
+        token[j] = token[j].toLowerCase();
+        if(!(stopwords.includes(token[j])))
+            clean.push(token[j]);
+    }
+    token = clean;
+    for(var j=0;j<token.length;j++) {
+        token[j] = natural.PorterStemmer.stem(token[j]);
+    }
+    var p = 0;
+    for(var i=0;i<token.length;i++) {
+        if(loglikelihood[token[i]])
+            p+= loglikelihood[token[i]];
+    }
+    return p;
+}
+
+var tt = "I am happy because I am learning :)";
+var prob = naivebayes_test(tt,temp);
+console.log(prob);
+
+router.post("/analysetweet", function(req,res){
+    var tweet = req.body.tweet;
+    var result = naivebayes_test(tweet,temp);
+    var x = {
+        result: result
+    }
+    return res.send(x);
+});
+
 
 module.exports = router;
