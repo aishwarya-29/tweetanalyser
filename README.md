@@ -1,5 +1,7 @@
 # tweetanalyser
-Performs sentiment analysis over a tweet to predict positive/negative sentiments.
+Performs sentiment analysis over a tweet to predict positive/negative sentiments.  
+Uses a NLP Naive-Bayes Algorithm to classify tweets as positive or negative.  
+This algorithm is integrated to the web app to classify input tweets.
 
 ### Running on localhost:  
 * **Step 1:** Fork repository and clone it to your desktop.
